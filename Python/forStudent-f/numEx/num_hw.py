@@ -84,10 +84,16 @@ def is_palindrome_number(num):
 
 # 题目六：素数
 def is_prime_num(num):
-    if not isinstance(n, int) or n < 1:
+    if num < 1 or not isinstance(num, int):
         return "Parameter Error."
-    for i in range(1, int(math.sqrt(n)) + 1):
-        if n % i == 0:
+
+    if num == 1:
+        return False
+    elif num == 2:
+        return True
+
+    for i in range(2, num):
+        if num % i == 0:
             return False
     return True
 
