@@ -9,17 +9,45 @@ import math
 # p1：（纬度、经度）
 # p2: （纬度、经度）
 def sphere_distance(p1, p2):
-    pass
+    if not isinstance(p1, tuple) or not isinstance(p2, tuple) or not 0 < p1[0] < 90 or not 0 < p1[1] < 180 or not 0 < p2[0] < 90 or not 0 < p2[1] < 180:
+        return "Parameter Error."
+    elif not isinstance(p1[0], float) or not isinstance(p1[1], float) or not isinstance(p2[0], float) or not isinstance(p2[1], float):
+        return "Parameter Error."
+
+    phi1 = math.radians(p1[0])
+    phi2 = math.radians(p2[0])
+    lambda1 = math.radians(p1[1])
+    lambda2 = math.radians(p2[1])
+    r = 6371
+    d = 2 * r * math.asin(math.sqrt(pow(math.sin(abs(phi2 - phi1) / 2), 2) + math.cos(phi1) * math.cos(phi2) * pow(math.sin(abs(lambda2 - lambda1) / 2), 2)))
+    return round(d, 2)
 
 
 # 题目十：计算Fibonacci 序列的值
 # Fibonacci是1，1, 2，3，5, 8，13.....
 # n1 = 1, n2 =2, n3 = n1+n2, n4 = n3+n2
 def fibonacci_recursion(number):
-    pass
+    if not isinstance(number, int) or number < 1:
+        return 'Parameter Error.'
+    if number == 1 or number == 2:
+        return 1
+    else:
+        return fibonacci_recursion(number - 2) + fibonacci_recursion(number - 1)
 
 def fibonacci_loop(number):
-    pass
+    if not isinstance(number, int) or number < 1:
+        return 'Parameter Error.'
+    if number == 1 or number == 2:
+        return 1
+    else:
+        addend1 = 1 # 前一个加数，即倒数第三项
+        addend2 = 1 # 后一个加数，即倒数第二项
+        # 计算第n项需要循环n-2次
+        for i in range(number - 2):
+            sum = addend1 + addend2
+            addend1 = addend2
+            addend2 = sum
+        return sum
 
 # 题目一：水仙花数
 def narcissistic_number():
