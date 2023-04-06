@@ -99,11 +99,40 @@ def is_prime_num(num):
 
 # 题目七：约瑟夫环
 def jose_prob(n, m):
-    pass
+    if n >= m or n <= 0 or m <= 0 or not isinstance(n, int) or not isinstance(m, int):
+        return "Parameter Error."
+
+    # 建立初始的队伍列表，假设所有人都是基督徒
+    queue = [1 for i in range(1, m + 1)]
+    # 建立队伍列表所对应的偏移量列表
+    queue_index = [j for j in range(m)]
+
+    step = 9  # 被投海者所报的数，即步长
+    cnt = 0  # 报数者在队伍中的位置，初始值为0
+    for k in range(m - n):
+        cnt = (cnt + step - 1) % len(queue_index)
+        queue[queue_index.pop(cnt)] = 0
+    return queue
 
 # 题目八：万年历
 def calendar(year, month, day):
-    pass
+    if not isinstance(year, int) or not isinstance(month, int) or not isinstance(day, int):
+        return "Parameter Error."
+    elif year < 1000 or year > 9999 or month < 1 or month > 12 or day < 1 or day > 31:
+        return "Parameter Error."
+    elif (month == 4 and day > 30) or (month == 6 and day > 30) or (month == 9 and day > 30) or (
+            month == 11 and day > 30):
+        return "Parameter Error."
+
+    days_each_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    days_past_month = 0
+    if (year % 4 == 0 and year % 100 != 0) or year % 400 == 0:
+        days_each_month[1] = 29  # 如果是闰年，二月天数需修改
+    if month == 2 and day > days_each_month[1]:
+        return "Parameter Error."
+    for i in range(month - 1):
+        days_past_month += days_each_month[i]
+    return days_past_month + day
 
 if __name__ == '__main__':
     calendar(2012,7,12)
