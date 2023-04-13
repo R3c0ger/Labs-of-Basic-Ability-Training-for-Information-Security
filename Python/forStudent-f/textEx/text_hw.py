@@ -1,20 +1,79 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-
+import re
 
 # 题目十一：摩斯码生成器
 def morse_code(usr_str):
-    pass
+    # 定义初始摩斯码字典，保留摩斯码字符之间没有空格的形式，以作兼容。
+    morse_dict_src = {'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.', 'G': '--.',
+                      'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.',
+                      'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-', 'U': '..-',
+                      'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..', '0': '-----',
+                      '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....', '6': '-....',
+                      '7': '--...', '8': '---..', '9': '----.'}
+    # 生成摩斯码字符之间有指定空格数量的摩斯码字典。
+    morse_dict = {}
+    for key in morse_dict_src:
+        if key not in morse_dict:
+            morse_dict[key] = ''
+        for morse_char in morse_dict_src[key]:
+            morse_dict[key] += (morse_char + ' ' * 1) # （1）点、破折号之间为一个空格。
+        morse_dict[key] = morse_dict[key].strip()
 
+    # 将输入字符串转为大写字母形式，遍历字符串并转换为摩斯码
+    morse_code = ''
+    for char in usr_str.upper():
+        if char in morse_dict:
+            morse_code += (morse_dict[char] + ' ' * 3) # （2）字符间为三个空格。
+        elif char == ' ':
+            morse_code += ' ' * (7 - 3) # （3）每个字符后都添加3个空格，因此单词后额外添加4个空格就可满足要求。
+    return morse_code.strip() # strip()不带参数，默认清除首尾的空白符。
 
 # 题目十二：词频统计
 def word_freq(path):
-    pass
+    # 读取sight word.txt文件，转换为字符串，将所有单词转为小写之后，按空字符分割成高频词列表，便于查找
+    with open('./testData/sight word.txt', 'r') as file:
+        sight_words = file.read().lower().split()
 
+    # 创建一个字典，用于存入文件中的所有单词，和对应的出现次数。
+    word_count = {}
+    with open(path, 'r') as file:
+        # 读取path文件，转换为字符串，将所有单词转为小写。
+        # 使用正则表达式将file字符串中的非必要符号转换为空格。
+        file = re.sub(r'[!`~@#$%^&*()_\-+=\[\]{}\/?,.:\"\\<\/>\s]', " ", file.read().lower())
+        # 使用正则表达式对file字符串进行单词匹配，对所有查找出的字符串在高频词列表中查找，非频繁词加入字典中并计数。
+        words = re.findall(r'\b[a-zA-Z\']+\b', file)
+        for word in words:
+            if word not in sight_words:
+                word_count[word] = word_count.get(word, 0) + 1
+
+    # 将字典转化为二元组列表，并使用匿名函数，按次数和单词的倒序进行排序
+    word_list = list(word_count.items())
+    word_list.sort(key=lambda pair: (pair[1], pair[0]), reverse=True)
+    return word_list[:10]
 
 # 题目十四：敏感词过滤
 def filter_words(user_input):
-    pass
+    # 读取敏感词库
+    sensitive_words = []
+    with open('sensitive.txt', 'r', encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()  # 去除行末空格和换行符
+            if line:  # 如果行不为空，则为敏感词，加入敏感词列表
+                sensitive_words.append(line)
+
+    # 过滤敏感词
+    for word in sensitive_words:
+        if word in user_input:
+            user_input = user_input.replace(word, '*' * len(word))
+
+    return user_input
+
+# 在这个函数中，我们首先读取了敏感词库文件，将其中的敏感词加入敏感词列表 sensitive_words 中。我们使用 with open 语句来打开文件，并对文件中的每一行进行处理，去除行末空格和换行符，如果行不为空，则将其加入敏感词列表。
+#
+# 接着，我们使用一个循环，遍历敏感词列表中的每一个敏感词，如果该敏感词出现在输入的字符串中，则使用 str.replace 方法将该敏感词替换为相应数量的星号。最后，我们将处理后的字符串返回。
+#
+# 需要注意的是，本题中我们并没有考虑敏感词的大小写问题，如果需要区分大小写，需要在比较时进行相应的处理。
 
 
 if __name__ == '__main__':
