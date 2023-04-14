@@ -18,7 +18,7 @@ def morse_code(usr_str):
             morse_dict[key] = ''
         for morse_char in morse_dict_src[key]:
             morse_dict[key] += (morse_char + ' ' * 1) # （1）点、破折号之间为一个空格。
-        morse_dict[key] = morse_dict[key].strip()
+        morse_dict[key] = morse_dict[key].strip() # strip()不带参数，默认清除首尾的空白符。[0:-1]也能实现这个要求。
 
     # 将输入字符串转为大写字母形式，遍历字符串并转换为摩斯码
     morse_code = ''
@@ -27,7 +27,7 @@ def morse_code(usr_str):
             morse_code += (morse_dict[char] + ' ' * 3) # （2）字符间为三个空格。
         elif char == ' ':
             morse_code += ' ' * (7 - 3) # （3）每个字符后都添加3个空格，因此单词后额外添加4个空格就可满足要求。
-    return morse_code.strip() # strip()不带参数，默认清除首尾的空白符。
+    return morse_code.strip()
 
 # 题目十二：词频统计
 def word_freq(path):
@@ -40,16 +40,16 @@ def word_freq(path):
     with open(path, 'r') as file:
         # 读取path文件，转换为字符串，将所有单词转为小写。
         # 使用正则表达式将file字符串中的非必要符号转换为空格。
-        file = re.sub(r'[!`~@#$%^&*()_\-+=\[\]{}\/?,.:\"\\<\/>\s]', " ", file.read().lower())
+        file = re.sub(r'[!`~@#$%^&*()_\-+=\[\]{}\/?,.:\"\\<\/>\s]', " ", file.read().lower()) # \s 表示匹配任意一个空白字符
         # 使用正则表达式对file字符串进行单词匹配，对所有查找出的字符串在高频词列表中查找，非频繁词加入字典中并计数。
         words = re.findall(r'\b[a-zA-Z\']+\b', file)
         for word in words:
             if word not in sight_words:
-                word_count[word] = word_count.get(word, 0) + 1
+                word_count[word] = word_count.get(word, 0) + 1 # get()方法返回指定键的值，如果值不在字典中返回默认值0。
 
     # 将字典转化为二元组列表，并使用匿名函数，按次数和单词的倒序进行排序
     word_list = list(word_count.items())
-    word_list.sort(key=lambda pair: (pair[1], pair[0]), reverse=True)
+    word_list.sort(key = lambda pair: (pair[1], pair[0]), reverse=True) # sorted()
     return word_list[:10]
 
 # 题目十四：敏感词过滤

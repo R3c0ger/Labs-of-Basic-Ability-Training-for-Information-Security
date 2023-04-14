@@ -6,7 +6,6 @@ import base64
 def b64en(path_in, path_out):
     pass
 
-
 def b64de(path_in, path_out):
     pass
 
