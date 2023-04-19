@@ -54,27 +54,16 @@ def word_freq(path):
 
 # 题目十四：敏感词过滤
 def filter_words(user_input):
-    # 读取敏感词库
-    sensitive_words = []
-    with open('sensitive.txt', 'r', encoding='utf-8') as f:
-        for line in f:
-            line = line.strip()  # 去除行末空格和换行符
-            if line:  # 如果行不为空，则为敏感词，加入敏感词列表
-                sensitive_words.append(line)
+    # 读取敏感词库文件，将其中的敏感词加入敏感词列表 sensitive_words 中。
+    with open('./testData/sensitive.txt', 'r') as file:
+        # “第x类”所在行不是敏感词，应去除同时具有“第”和“类”两个字的文本行。同时空行也不是敏感词。
+        sensitive_words = [line.strip() for line in file if not re.findall(r'第.*类|^\s*$', line)]
 
     # 过滤敏感词
     for word in sensitive_words:
         if word in user_input:
             user_input = user_input.replace(word, '*' * len(word))
-
     return user_input
-
-# 在这个函数中，我们首先读取了敏感词库文件，将其中的敏感词加入敏感词列表 sensitive_words 中。我们使用 with open 语句来打开文件，并对文件中的每一行进行处理，去除行末空格和换行符，如果行不为空，则将其加入敏感词列表。
-#
-# 接着，我们使用一个循环，遍历敏感词列表中的每一个敏感词，如果该敏感词出现在输入的字符串中，则使用 str.replace 方法将该敏感词替换为相应数量的星号。最后，我们将处理后的字符串返回。
-#
-# 需要注意的是，本题中我们并没有考虑敏感词的大小写问题，如果需要区分大小写，需要在比较时进行相应的处理。
-
 
 if __name__ == '__main__':
     li = morse_code('I love Python')
