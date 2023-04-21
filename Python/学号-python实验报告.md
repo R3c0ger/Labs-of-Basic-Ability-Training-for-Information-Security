@@ -1,3 +1,24 @@
+# 参考
+
+实验前的准备：
+
+1. [Python3 环境搭建 | 菜鸟教程](https://www.runoob.com/python3/python3-install.html)
+2. 安装 pytest：[【无标题】pytest（第一章）pycharm中安装和运行pytest](https://blog.csdn.net/weixin_51971787/article/details/129274025)
+
+参考网站：
+
+[encode()和decode()](https://blog.csdn.net/zhanghs1989/article/details/113890912)
+
+[Python文件操作（I/O）](http://c.biancheng.net/python/file/)
+
+[python中二维数组list的sort](https://blog.csdn.net/qq_36155746/article/details/105934256)
+
+[struct — Interpret bytes as packed binary data](https://docs.python.org/3/library/struct.html#module-struct)
+
+[xml.etree.ElementTree — The ElementTree XML API](https://docs.python.org/3.9/library/xml.etree.elementtree.html)
+
+[xml.dom — The Document Object Model API](https://docs.python.org/3/library/xml.dom.html#documenttype-objects)
+
 # 第一部分
 
 # 题目一：水仙花数
