@@ -14,7 +14,7 @@ What is the HTML tag used to show an image?
 
 ## 截图
 
-![](img/Pasted%20image%2020230427171447.png)
+![](img/1-ans.png)
 
 # 题目 2
 
@@ -28,7 +28,7 @@ What is the CSS "property: value" used to make an HTML element's text aligned to
 
 ## 截图
 
-![](img/Pasted%20image%2020230427181006.png)
+![](img/2-ans.png)
 
 # 题目 3
 
@@ -44,9 +44,9 @@ Check the above login form for exposed passwords. Submit the password as the ans
 
 ## 截图
 
-![](img/Pasted%20image%2020230427181407.png)
+![](img/3-1.png)
 
-![](img/Pasted%20image%2020230427174028.png)
+![](img/3-ans.png)
 
 # 题目 4
 
@@ -62,11 +62,11 @@ What text would be displayed on the page if we use the following payload as our 
 
 ## 截图
 
-![](img/Pasted%20image%2020230427183235.png)
+![](img/4-1.png)
 
-![](img/Pasted%20image%2020230427183401.png)
+![](img/4-2.png)
 
-![](img/Pasted%20image%2020230427182945.png)
+![](img/4-ans.png)
 
 # 题目 5
 
@@ -76,15 +76,15 @@ Try to use XSS to get the cookie value in the above page
 
 ## 解题思路
 
-教程当中已经给出弹出 cookie 的 XSS 攻击载荷，在虚拟机中输入并确认即可弹窗显示 cookie 内容。`<img src=/ onerror=alert(document.cookie)>` 表示插入图片，但图片不存在，触发 onerror 事件，弹窗显示 cookie 内容。
+教程当中已经给出弹出 cookie 的 XSS 攻击载荷，在虚拟机中输入并确认即可弹窗显示 cookie 内容。`<img src=/ onerror=alert(document.cookie)>` 表示在页面中插入 src 属性为 URL 的图片，但图片不存在，触发 onerror 事件，弹窗显示 cookie 内容。
 
 ## 截图
 
-![](img/Pasted%20image%2020230427184248.png)
+![](img/5-1.png)
 
-![](img/Pasted%20image%2020230427184431.png)
+![](img/5-2.png)
 
-![](img/Pasted%20image%2020230427184500.png)
+![](img/5-ans.png)
 
 # 题目 6
 
@@ -98,7 +98,7 @@ What operating system is 'WAMP' used with?
 
 ## 截图
 
-![](img/Pasted%20image%2020230427185539.png)
+![](img/6-ans.png)
 
 # 题目 7
 
@@ -112,61 +112,78 @@ If a web server returns an HTTP code 201, what does it stand for?
 
 ## 截图
 
-![](img/Pasted%20image%2020230427190424.png)
+![](img/7-ans.png)
 
 # 题目 8
 
 ## 题目
 
-
+What type of database is Google's Firebase Database?
 
 ## 解题思路
 
+查询谷歌可得到结果：
 
+> The Firebase Realtime Database is a **cloud-hosted NoSQL database** that lets you store and sync data between your users in realtime.
 
 ## 截图
 
+![](img/8-1.png)
 
+![](img/8-ans.png)
 
 # 题目 9
 
 ## 题目
 
-
+Use GET request '/index.php?id=0' to search for the name of the user with id number 1?
 
 ## 解题思路
 
-
+使用 curl 向题目给出的 URL 发送请求，注意将 `id=0` 改为 `id=1` 即可：
+`curl http://161.35.36.167:32228/index.php?id=1`
 
 ## 截图
 
+![](img/9-1.png)
 
+![](img/9-ans.png)
 
 # 题目 10
 
 ## 题目
 
-
+To which of the above categories does public vulnerability 'CVE-2014-6271' belongs to?
 
 ## 解题思路
 
+在 [CVE官网](https://cve.mitre.org/) 中查询 CVE-2014-6271，得到如下描述：
 
+> GNU Bash through 4.3 processes trailing strings after function definitions in the values of environment variables, which allows remote attackers to execute arbitrary code via a crafted environment, as demonstrated by vectors involving the ForceCommand feature in OpenSSH sshd, the mod_cgi and mod_cgid modules in the Apache HTTP Server, scripts executed by unspecified DHCP clients, and other situations in which setting the environment occurs across a privilege boundary from Bash execution, aka "ShellShock." 
+
+GNU Bash 中的 CVE-2014-6271“破壳”漏洞的产生原因是：以“(){”开头定义的环境变量在命令 `env` 中解析成函数后，Bash 继续解析并执行函数定义后尾随的字符串中的 shell 命令，核心原因在于在输入的过滤中没有严格限制边界，也没有做出合法化的参数判断。
+
+因此可知 CVE-2014-6271 是命令注入漏洞。
 
 ## 截图
 
+![](img/10-1.png)
 
+![](img/10-ans.png)
 
 # 题目 11
 
 ## 题目
 
-
+What is the CVSS score of the public vulnerability CVE-2017-0144?
 
 ## 解题思路
 
-
+在 Hint 中提示要求使用 CVSS v2.0 评分。在 [NVD](https://nvd.nist.gov/vuln/detail/CVE-2017-0144) 中查询 CVE-2017-0144，发现其 CVSS v2.0 评分为 9.3。
 
 ## 截图
 
+![](img/11-1.png)
 
+![](img/11-ans.png)
 

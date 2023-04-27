@@ -28,4 +28,6 @@
 
 题目来源：实验报告内容包括https://academy.hackthebox.com/module/75/section/719平台上introduction to web applications模块的所有题目（小节末尾的question），共11道题。
 
+题目蜜汁简单，一半的题目都是谷歌就行了。
+
 （忘开private了，不会因为查重查到我自己写的这些代码和报告而给我零分吧（心虚））
