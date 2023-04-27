@@ -11,9 +11,19 @@
 
 2. Python实验
 
-参考书：Python语言及其应用 (Bill Lubanovic)
+- 参考书：Python语言及其应用 (Bill Lubanovic)
+- 参考网站：菜鸟
+
+感谢OpenAI（虽然 3.5 的正确率还是不太行，可能是我的 prompt 不好吧），感谢 GitHub 学生认证，感谢 Copilot（究竟是我在写代码还是它在写？它是副驾我是副驾？）
 
 3. Crypto实验
 
 简单的要死好吧。
+
+4. Web实验
+
+题目来源是 CTFHub 中的技能树-Web-Web前置技能-HTTP协议，网上 Writeup 满天飞好吧。
+
+5. Web实践实验
+
 
