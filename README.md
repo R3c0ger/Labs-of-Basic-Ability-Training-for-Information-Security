@@ -18,7 +18,7 @@
 
 3. Crypto实验
 
-简单的要死好吧。
+题目为文件夹里的PDF（好像网上都有），简单的要死好吧。
 
 4. Web实验
 
@@ -26,4 +26,6 @@
 
 5. Web实践实验
 
+题目来源：实验报告内容包括https://academy.hackthebox.com/module/75/section/719平台上introduction to web applications模块的所有题目（小节末尾的question），共11道题。
 
+（忘开private了，不会因为查重查到我自己写的这些代码和报告而给我零分吧（心虚））
