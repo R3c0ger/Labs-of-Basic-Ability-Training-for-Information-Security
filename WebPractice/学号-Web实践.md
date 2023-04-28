@@ -6,7 +6,7 @@ What is the HTML tag used to show an image?
 
 ## 解题思路
 
-搜索即可。
+谷歌搜索即可。
 
 另外，在 Typora 中，对已经插入到文中的 `![]()` 格式的图片设置缩放，则该行代码会自动变成 HTML 代码，例如：`<img src="img/Pasted%20image%2020230427171447.png" style="zoom:50%;" />`
 
@@ -40,7 +40,7 @@ Check the above login form for exposed passwords. Submit the password as the ans
 
 查看网页源代码即可。
 
-发现 `<!-- TODO: remove test credentials admin:HiddenInPlainSight -->`，根据 Sensitive Data Exposure 所讲授的内容和例子，我们可以推断冒号后的内容就是测试用例的密码。
+发现 `<!-- TODO: remove test credentials admin:HiddenInPlainSight -->`，根据 Sensitive Data Exposure 所讲授的内容和例子，我们可以推断在网页源码中的这份注释会泄露测试用的账号和密码，冒号后的内容 `HiddenInPlainSight` 就是测试用的密码。
 
 ## 截图
 
@@ -76,7 +76,12 @@ Try to use XSS to get the cookie value in the above page
 
 ## 解题思路
 
-教程当中已经给出弹出 cookie 的 XSS 攻击载荷，在虚拟机中输入并确认即可弹窗显示 cookie 内容。`<img src=/ onerror=alert(document.cookie)>` 表示在页面中插入 src 属性为 URL 的图片，但图片不存在，触发 onerror 事件，弹窗显示 cookie 内容。
+教程当中已经给出弹出 cookie 的 XSS 攻击载荷，在虚拟机中输入并确认即可弹窗显示 cookie 内容。
+
+在 `#"><img src=/ onerror=alert(document.cookie)>` 这段 XSS 攻击代码当中：
+1. #"> 这一部分可用来闭合前面的标签，从而使 `<img>` 标签生效；
+2. `<img src=/` 表示在页面中插入 src 属性为 `/` 的图片，因此浏览器会请求网站根目录下的所有图片。
+3. 网站根目录下不存在图片，图片加载失败从而触发 onerror 事件，执行事件中的 JavaScript 代码，弹窗显示 cookie 内容。
 
 ## 截图
 
@@ -94,7 +99,7 @@ What operating system is 'WAMP' used with?
 
 ## 解题思路
 
-阅读教程可知，WAMP 组合由 Windows、Apache、MySQL 和 PHP 这四个后端组件‌组成，即 Windows Apache Mysql PHP 集成环境。因此 WAMP 使用的操作系统是 Windows。
+阅读文章可知，WAMP Combination 由 Windows、Apache、MySQL 和 PHP 这四个后端组件‌组成，即 Windows Apache Mysql PHP 集成环境。因此 WAMP 使用的操作系统是 Windows。
 
 ## 截图
 
@@ -125,6 +130,8 @@ What type of database is Google's Firebase Database?
 查询谷歌可得到结果：
 
 > The Firebase Realtime Database is a **cloud-hosted NoSQL database** that lets you store and sync data between your users in realtime.
+
+可知 Firebase 为无关系数据库。
 
 ## 截图
 
@@ -179,7 +186,7 @@ What is the CVSS score of the public vulnerability CVE-2017-0144?
 
 ## 解题思路
 
-在 Hint 中提示要求使用 CVSS v2.0 评分。在 [NVD](https://nvd.nist.gov/vuln/detail/CVE-2017-0144) 中查询 CVE-2017-0144，发现其 CVSS v2.0 评分为 9.3。
+在 Hint 中提示要求使用 CVSS v2.0 评分。在 [NVD](https://nvd.nist.gov/vuln/detail/CVE-2017-0144) 中查询 CVE-2017-0144，发现 CVE-2017-0144“永恒之蓝”的 CVSS v2.0 评分为 9.3。
 
 ## 截图
 

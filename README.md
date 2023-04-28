@@ -30,4 +30,8 @@
 
 题目蜜汁简单，一半的题目都是谷歌就行了。
 
+6. SQL
+
+题目来源：平台https://academy.hackthebox.com/module/details/33上模块SQL Injection Fundamentals的内容。该部分实验报告只写题目Skills Assessment - SQL Injection Fundamentals的解题方法。
+
 （忘开private了，不会因为查重查到我自己写的这些代码和报告而给我零分吧（心虚））
