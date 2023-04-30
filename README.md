@@ -30,14 +30,13 @@ TOC：
 
 5. Web实践实验
 
-题目来源：实验报告内容包括https://academy.hackthebox.com/module/75/section/719平台上introduction to web applications模块的所有题目（小节末尾的question），共11道题。
+题目来源：实验报告内容包括 [Introduction to Web Applications](https://academy.hackthebox.com/module/75/section/719) 平台上introduction to web applications模块的所有题目（小节末尾的question），共11道题。
 
 题目蜜汁简单，一半的题目都是谷歌就行了。
 
 6. SQL
 
-题目来源：平台https://academy.hackthebox.com/module/details/33上模块SQL Injection Fundamentals的内容。该部分实验报告只写题目Skills Assessment - SQL Injection Fundamentals的解题方法。（虽然这么说，但是这里放的可不是我交上去的报告，其余题目的解析的截图还是有的）
+题目来源：平台 [SQL Injection Fundamentals](https://academy.hackthebox.com/module/details/33) 上模块SQL Injection Fundamentals的内容。该部分实验报告只写题目Skills Assessment - SQL Injection Fundamentals的解题方法。（虽然这么说，但是这里放的可不是我交上去的报告，其余题目的解析的截图还是有的）
 
 解题参考：https://www.youtube.com/@engin3458
-
 
