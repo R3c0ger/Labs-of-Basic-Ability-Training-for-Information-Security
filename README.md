@@ -1,5 +1,9 @@
 这里是<font color="#548dd4">信息安全基础能力训练课程</font>的实验课课程资料与报告！敬请参观与指正！
 
+请勿直球抄袭！本人不对任何抄袭借鉴行为及其后果负责。（忘开private了，不会因为查重查到我自己写的这些代码和报告而给我判成抄袭吧（心虚））
+
+TOC：
+
 1. Linux实验
 
 适用版本：
@@ -32,6 +36,8 @@
 
 6. SQL
 
-题目来源：平台https://academy.hackthebox.com/module/details/33上模块SQL Injection Fundamentals的内容。该部分实验报告只写题目Skills Assessment - SQL Injection Fundamentals的解题方法。
+题目来源：平台https://academy.hackthebox.com/module/details/33上模块SQL Injection Fundamentals的内容。该部分实验报告只写题目Skills Assessment - SQL Injection Fundamentals的解题方法。（虽然这么说，但是这里放的可不是我交上去的报告，其余题目的解析的截图还是有的）
 
-（忘开private了，不会因为查重查到我自己写的这些代码和报告而给我零分吧（心虚））
+解题参考：https://www.youtube.com/@engin3458
+
+
